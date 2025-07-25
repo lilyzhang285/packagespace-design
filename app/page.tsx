@@ -59,6 +59,12 @@ const templates = [
   { id: 4, name: "手提袋", preview: "/api/placeholder/120/120", category: "袋型", description: "便携手提包装袋" },
   { id: 5, name: "信封袋", preview: "/api/placeholder/120/120", category: "袋型", description: "信封式包装袋" },
   { id: 6, name: "立体盒", preview: "/api/placeholder/120/120", category: "盒型", description: "立体展示包装盒" },
+  { id: 7, name: "折叠盒", preview: "/api/placeholder/120/120", category: "盒型", description: "可折叠式包装盒" },
+  { id: 8, name: "六角盒", preview: "/api/placeholder/120/120", category: "盒型", description: "六边形包装盒" },
+  { id: 9, name: "三角盒", preview: "/api/placeholder/120/120", category: "盒型", description: "三角形包装盒" },
+  { id: 10, name: "长条盒", preview: "/api/placeholder/120/120", category: "盒型", description: "细长条形包装盒" },
+  { id: 11, name: "圆筒盒", preview: "/api/placeholder/120/120", category: "筒型", description: "圆柱形包装筒" },
+  { id: 12, name: "展示盒", preview: "/api/placeholder/120/120", category: "盒型", description: "透明展示包装盒" },
 ];
 
 
@@ -207,14 +213,15 @@ export default function PackageSpace() {
         </div>
 
         {/* 右侧：工具面板 */}
-        <div className="w-80 bg-white/90 backdrop-blur-sm border-l border-gray-200/50 shadow-sm flex flex-col">
+        <div className="w-[330px] bg-white/90 backdrop-blur-sm border-l border-gray-200/50 shadow-sm flex flex-col">
           <Tabs defaultValue="templates" className="flex-1 flex flex-col">
-            <TabsList className="grid w-full grid-cols-2 m-4 bg-gray-100 rounded-xl p-1">
-              <TabsTrigger value="templates" className="rounded-lg text-sm font-medium">模板</TabsTrigger>
-              <TabsTrigger value="layers" className="rounded-lg text-sm font-medium">图层</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 mx-6 mt-6 mb-8 bg-transparent h-auto border-b border-gray-200">
+              <TabsTrigger value="templates" className="text-sm font-medium text-gray-600 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:bg-transparent border-b-2 border-transparent transition-all duration-200 rounded-none py-3 text-center">模板</TabsTrigger>
+              <TabsTrigger value="layers" className="text-sm font-medium text-gray-600 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:bg-transparent border-b-2 border-transparent transition-all duration-200 rounded-none py-3 text-center">图层</TabsTrigger>
+              <TabsTrigger value="editor" className="text-sm font-medium text-gray-600 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:bg-transparent border-b-2 border-transparent transition-all duration-200 rounded-none py-3 text-center">编辑</TabsTrigger>
             </TabsList>
             
-            <div className="flex-1 overflow-hidden px-4">
+            <div className="flex-1 px-4 pb-4">
               <TabsContent value="templates" className="h-full mt-0">
                 <div className="space-y-4 h-full">
                   <div className="flex items-center justify-between">
@@ -224,24 +231,31 @@ export default function PackageSpace() {
                     </Button>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-3 overflow-y-auto max-h-[664px]">
+                  <div className="grid grid-cols-2 gap-3 overflow-y-auto max-h-[800px] p-1">
                     {templates.map((template) => (
-                      <Card
-                        key={template.id}
-                        className={`cursor-pointer transition-all duration-200 hover:shadow-lg ${
-                          selectedTemplate.id === template.id 
-                            ? 'ring-2 ring-blue-500 bg-blue-50' 
-                            : 'hover:bg-gray-50'
-                        }`}
-                        onClick={() => setSelectedTemplate(template)}
-                      >
-                        <CardContent className="p-2">
-                          <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-2 flex items-center justify-center">
-                            <Box className="w-6 h-6 text-gray-400" />
-                          </div>
-                          <h4 className="text-xs font-medium text-center text-gray-800">{template.name}</h4>
-                        </CardContent>
-                      </Card>
+                      <div key={template.id} className="aspect-square p-1">
+                        <Card
+                          className={`h-full cursor-pointer transition-all duration-200 hover:shadow-lg ${
+                            selectedTemplate.id === template.id 
+                              ? 'ring-2 ring-blue-500 bg-blue-50' 
+                              : 'hover:bg-gray-50'
+                          }`}
+                          onClick={() => setSelectedTemplate(template)}
+                        >
+                          <CardContent className="p-0 h-full rounded-lg overflow-hidden">
+                            <div className="h-full flex flex-col">
+                              {/* 上半部分：预览区域 */}
+                              <div className="flex-1 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                                <Box className="w-8 h-8 text-gray-400" />
+                              </div>
+                              {/* 下半部分：标题区域 */}
+                              <div className="h-12 bg-gradient-to-r from-gray-700 to-gray-800 flex items-center justify-center">
+                                <h4 className="text-xs font-medium text-center text-white">{template.name}</h4>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </div>
                     ))}
                   </div>
 
@@ -270,6 +284,129 @@ export default function PackageSpace() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="editor" className="h-full mt-0">
+                <div className="space-y-4 h-full overflow-y-auto px-4 pb-4 pt-2">
+                  <h3 className="font-semibold text-gray-800">编辑工具</h3>
+                  
+                  {/* 替换图片 */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700 flex items-center">
+                      <ImageIcon className="w-4 h-4 mr-2" />
+                      替换图片
+                    </h4>
+                    <div className="grid grid-cols-3 gap-2">
+                      <Button variant="outline" size="sm" className="text-xs">
+                        <Upload className="w-3 h-3 mr-1" />
+                        手动放图
+                      </Button>
+                      <Button variant="outline" size="sm" className="text-xs">
+                        <Sparkles className="w-3 h-3 mr-1" />
+                        AI消除
+                      </Button>
+                      <Button variant="outline" size="sm" className="text-xs">
+                        <Edit className="w-3 h-3 mr-1" />
+                        像皮擦
+                      </Button>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* 字体选择 */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700 flex items-center">
+                      <Type className="w-4 h-4 mr-2" />
+                      字体设置
+                    </h4>
+                    <div className="space-y-2">
+                      <select className="w-full p-2 text-xs border border-gray-200 rounded-lg bg-white">
+                        <option>思源黑体</option>
+                        <option>微软雅黑</option>
+                        <option>宋体</option>
+                        <option>楷体</option>
+                      </select>
+                      <div className="flex space-x-2">
+                        <input type="number" placeholder="字号" className="flex-1 p-2 text-xs border border-gray-200 rounded-lg" defaultValue="12" />
+                        <Button variant="outline" size="sm" className="w-8 h-8 p-0">
+                          <strong>B</strong>
+                        </Button>
+                        <Button variant="outline" size="sm" className="w-8 h-8 p-0">
+                          <em>I</em>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* 位置 */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700">位置</h4>
+                    <div className="grid grid-cols-3 gap-2 items-center">
+                      <div className="flex items-center space-x-1">
+                        <Triangle className="w-3 h-3" />
+                        <span className="text-xs">0</span>
+                      </div>
+                      <span className="text-xs text-center">°</span>
+                      <div className="flex space-x-1">
+                        <Button variant="outline" size="sm" className="w-6 h-6 p-0 text-xs">
+                          <AlignLeft className="w-3 h-3" />
+                        </Button>
+                        <Button variant="outline" size="sm" className="w-6 h-6 p-0 text-xs">
+                          <AlignCenter className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* 外观 */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700">外观</h4>
+                    <div className="space-y-2">
+                      <div className="grid grid-cols-3 gap-2 items-center text-xs">
+                        <span>W</span>
+                        <Input className="h-7 text-xs" defaultValue="384" />
+                        <Lock className="w-4 h-4 text-gray-400" />
+                      </div>
+                      <div className="grid grid-cols-3 gap-2 items-center text-xs">
+                        <span>H</span>
+                        <Input className="h-7 text-xs" defaultValue="678" />
+                        <Lock className="w-4 h-4 text-gray-400" />
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 items-center text-xs">
+                        <div className="flex items-center space-x-1">
+                          <Square className="w-3 h-3" />
+                          <Input className="h-7 text-xs flex-1" defaultValue="100" />
+                        </div>
+                        <span>%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* 描边 */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-medium text-gray-700">描边</h4>
+                      <div className="w-4 h-4 bg-black rounded-full"></div>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* 阴影 */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-medium text-gray-700">阴影</h4>
+                      <div className="w-4 h-4 bg-black rounded-full"></div>
+                    </div>
                   </div>
                 </div>
               </TabsContent>
