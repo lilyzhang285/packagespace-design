@@ -235,15 +235,11 @@ export default function PackageSpace() {
                         }`}
                         onClick={() => setSelectedTemplate(template)}
                       >
-                        <CardContent className="p-3">
+                        <CardContent className="p-2">
                           <div className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-2 flex items-center justify-center">
-                            <Box className="w-8 h-8 text-gray-400" />
+                            <Box className="w-6 h-6 text-gray-400" />
                           </div>
-                          <h4 className="text-sm font-medium text-center text-gray-800">{template.name}</h4>
-                          <p className="text-xs text-gray-500 text-center mt-1">{template.description}</p>
-                          <Badge variant="outline" className="text-xs mt-2 w-full justify-center">
-                            {template.category}
-                          </Badge>
+                          <h4 className="text-xs font-medium text-center text-gray-800">{template.name}</h4>
                         </CardContent>
                       </Card>
                     ))}

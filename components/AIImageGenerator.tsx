@@ -100,7 +100,7 @@ export default function AIImageGenerator({ onImageSelect }: AIImageGeneratorProp
             placeholder="例如：一个现代简约的咖啡包装设计，使用棕色和金色配色..."
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className="min-h-[140px] resize-none border-green-200 focus:border-green-400 focus:ring-green-200 bg-white/80 backdrop-blur-sm text-sm"
+            className="min-h-[150px] resize-none border-green-200 focus:border-green-400 focus:ring-green-200 bg-white/80 backdrop-blur-sm text-sm"
           />
         </div>
 
