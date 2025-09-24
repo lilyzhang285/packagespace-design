@@ -215,10 +215,10 @@ export default function PackageSpace() {
         {/* 右侧：工具面板 */}
         <div className="w-[330px] bg-white/90 backdrop-blur-sm border-l border-gray-200/50 shadow-sm flex flex-col">
           <Tabs defaultValue="templates" className="flex-1 flex flex-col">
-            <TabsList className="grid w-full grid-cols-3 mx-6 mt-6 mb-8 bg-transparent h-auto border-b border-gray-200">
-              <TabsTrigger value="templates" className="text-sm font-medium text-gray-600 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:bg-transparent border-b-2 border-transparent transition-all duration-200 rounded-none py-3 text-center">模板</TabsTrigger>
-              <TabsTrigger value="layers" className="text-sm font-medium text-gray-600 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:bg-transparent border-b-2 border-transparent transition-all duration-200 rounded-none py-3 text-center">图层</TabsTrigger>
-              <TabsTrigger value="editor" className="text-sm font-medium text-gray-600 data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:bg-transparent border-b-2 border-transparent transition-all duration-200 rounded-none py-3 text-center">编辑</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 mx-2 mt-5 mb-6 bg-gray-100 rounded-xl p-1 gap-0.5 h-12">
+              <TabsTrigger value="templates" className="text-sm font-medium text-gray-600 data-[state=active]:text-white data-[state=active]:bg-blue-500 data-[state=active]:shadow-md hover:bg-gray-200 transition-all duration-200 rounded-lg flex items-center justify-center">模板</TabsTrigger>
+              <TabsTrigger value="layers" className="text-sm font-medium text-gray-600 data-[state=active]:text-white data-[state=active]:bg-blue-500 data-[state=active]:shadow-md hover:bg-gray-200 transition-all duration-200 rounded-lg flex items-center justify-center">图层</TabsTrigger>
+              <TabsTrigger value="editor" className="text-sm font-medium text-gray-600 data-[state=active]:text-white data-[state=active]:bg-blue-500 data-[state=active]:shadow-md hover:bg-gray-200 transition-all duration-200 rounded-lg flex items-center justify-center">编辑</TabsTrigger>
             </TabsList>
             
             <div className="flex-1 px-4 pb-4">
@@ -233,24 +233,24 @@ export default function PackageSpace() {
                   
                   <div className="grid grid-cols-2 gap-3 overflow-y-auto max-h-[800px] p-1">
                     {templates.map((template) => (
-                      <div key={template.id} className="aspect-square p-1">
+                      <div key={template.id} className="aspect-square">
                         <Card
-                          className={`h-full cursor-pointer transition-all duration-200 hover:shadow-lg ${
+                          className={`h-full cursor-pointer transition-all duration-200 hover:shadow-lg rounded-lg overflow-hidden ${
                             selectedTemplate.id === template.id 
-                              ? 'ring-2 ring-blue-500 bg-blue-50' 
-                              : 'hover:bg-gray-50'
+                              ? 'ring-2 ring-blue-500' 
+                              : ''
                           }`}
                           onClick={() => setSelectedTemplate(template)}
                         >
-                          <CardContent className="p-0 h-full rounded-lg overflow-hidden">
+                          <CardContent className="p-0 h-full overflow-hidden">
                             <div className="h-full flex flex-col">
                               {/* 上半部分：预览区域 */}
                               <div className="flex-1 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                                 <Box className="w-8 h-8 text-gray-400" />
                               </div>
                               {/* 下半部分：标题区域 */}
-                              <div className="h-12 bg-gradient-to-r from-gray-700 to-gray-800 flex items-center justify-center">
-                                <h4 className="text-xs font-medium text-center text-white">{template.name}</h4>
+                              <div className="h-12 bg-gradient-to-t from-gray-900 via-gray-700 to-gray-500/80 flex items-end justify-center pb-2">
+                                <h4 className="text-xs font-medium text-center text-white drop-shadow-sm">{template.name}</h4>
                               </div>
                             </div>
                           </CardContent>
